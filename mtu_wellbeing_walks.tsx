@@ -54,7 +54,7 @@ const TRAILS_DATA = [
     difficulty: 'Easy',
     elevation: '20 ft',
     surface: 'Wooden Boardwalk & Flat Trail',
-    allTrailsUrl: 'https://www.alltrails.com/trail/us/michigan/nara-nature-park-boardwalk',
+    allTrailsUrl: 'https://www.alltrails.com/parks/us/michigan/nara-nature-center',
     description: 'Meanders peacefully along the Pilgrim River and wetlands with scenic covered bridges and wildlife viewing platforms.',
     wellbeingTip: 'Listen to the sound of flowing water beneath the boardwalk to ground yourself when feeling overwhelmed.',
     features: ['Waterfront', 'Bird Watching', 'Wheelchair Accessible', 'Covered Bridges'],
