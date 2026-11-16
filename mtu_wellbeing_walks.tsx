@@ -1039,7 +1039,7 @@ export default function App() {
                   <Send className="w-5 h-5" /> Share Your Feedback
                 </h2>
                 <a
-                  href="https://docs.google.com/forms/d/e/1FAIpQLSfs1ryrBV56t49Ct6D7JlEPQTLi9wChJ7VgWKWykbqVzjBu2Q/viewform?usp=header"
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSfCC7MbuF4aRcASU37Jb_itEfIm0I1XasPWXIdL5TjOarpguA/viewform?usp=header"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs font-semibold text-amber-300 hover:text-amber-200 inline-flex items-center gap-1"
@@ -1050,7 +1050,7 @@ export default function App() {
 
               <div className="rounded-xl overflow-hidden bg-white">
                 <iframe
-                  src="https://docs.google.com/forms/d/e/1FAIpQLSfs1ryrBV56t49Ct6D7JlEPQTLi9wChJ7VgWKWykbqVzjBu2Q/viewform?embedded=true"
+                  src="https://docs.google.com/forms/d/e/1FAIpQLSfCC7MbuF4aRcASU37Jb_itEfIm0I1XasPWXIdL5TjOarpguA/viewform?embedded=true"
                   title="MTU Wellbeing Walks Feedback Form"
                   className="w-full h-[1200px] border-0"
                   loading="lazy"
