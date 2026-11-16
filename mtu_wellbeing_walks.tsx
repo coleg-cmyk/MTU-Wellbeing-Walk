@@ -17,8 +17,6 @@ import {
   Wind,
   Award,
   Send,
-  MessageSquare,
-  CheckCircle,
   BarChart2,
   Filter,
   Navigation,
@@ -126,40 +124,6 @@ const TRAILS_DATA = [
   }
 ];
 
-// --- INITIAL COMMUNITY LOGS ---
-const MOCK_COMMUNITY_LOGS = [
-  {
-    id: 1,
-    name: 'Hannah M.',
-    major: 'Mechanical Engineering',
-    trail: 'Nara Nature Park Boardwalk',
-    miles: 2.5,
-    reflection: 'Needed a break from thermodynamics prep. Walking along the Pilgrim River listening to the water completely reset my stress levels!',
-    date: '2 hours ago',
-    mood: 'Calm & Recharged'
-  },
-  {
-    id: 2,
-    name: 'Derek K.',
-    major: 'Computer Science',
-    trail: 'Tech Trails Core Loop',
-    miles: 1.8,
-    reflection: 'Crisp autumn air behind the SDC. 35 minutes away from screens did wonders for my focus.',
-    date: '5 hours ago',
-    mood: 'Energized'
-  },
-  {
-    id: 3,
-    name: 'Prof. Larson',
-    major: 'Biology Dept',
-    trail: 'Prince’s Point Waterfront Path',
-    miles: 0.9,
-    reflection: 'Quick sunset walk by the Portage Canal before heading home. Reminded me how lucky we are to live in the Keweenaw.',
-    date: '1 day ago',
-    mood: 'Grateful'
-  }
-];
-
 export default function App() {
   const [activeTab, setActiveTab] = useState('home');
 
@@ -181,18 +145,6 @@ export default function App() {
   const [breathingPhase, setBreathingPhase] = useState('Inhale');
   const [breathingTimer, setBreathingTimer] = useState(4);
   const [isBreathingActive, setIsBreathingActive] = useState(false);
-
-  // Trail Log State
-  const [logs, setLogs] = useState(MOCK_COMMUNITY_LOGS);
-  const [logForm, setLogForm] = useState({
-    name: '',
-    major: '',
-    trail: 'Tech Trails Core Loop',
-    miles: '1.8',
-    reflection: '',
-    mood: 'Calm'
-  });
-  const [logSubmitted, setLogSubmitted] = useState(false);
 
   // Mood Widget State
   const [currentMood, setCurrentMood] = useState('');
@@ -228,7 +180,7 @@ export default function App() {
       Stressed: "We hear you! Houghton's quiet nature paths are proven to lower cortisol. Try a gentle 20-min boardwalk walk at Nara Park.",
       Anxious: "Grounding yourself is key. Try our 5-4-3-2-1 exercise on the Resources page or take a calm stroll along Prince's Point.",
       Tired: "A quick 15-minute trail walk behind the SDC can pump oxygen to your brain and give you natural energy without caffeine crash!",
-      Happy: "Awesome! Share that positive energy by completing a walk and posting an inspiring note on our Trail Log!",
+      Happy: "Awesome! Share that positive energy by completing a walk and sharing how it went on our Feedback page!",
       Overwhelmed: "Take a step back from assignments. Nature doesn't ask anything of you. Head to Tech Trails and just breathe."
     };
     setMoodMessage(messages[mood] || "Taking a short walk is always a great choice for your well-being!");
@@ -304,35 +256,6 @@ export default function App() {
     }
   };
 
-  // Submit Trail Log
-  const handleLogSubmit = (e) => {
-    e.preventDefault();
-    if (!logForm.name || !logForm.reflection) return;
-
-    const newLog = {
-      id: Date.now(),
-      name: logForm.name,
-      major: logForm.major || 'Huskies Community',
-      trail: logForm.trail,
-      miles: parseFloat(logForm.miles) || 1.5,
-      reflection: logForm.reflection,
-      date: 'Just now',
-      mood: logForm.mood
-    };
-
-    setLogs([newLog, ...logs]);
-    setLogSubmitted(true);
-    setTimeout(() => setLogSubmitted(false), 4000);
-    setLogForm({
-      name: '',
-      major: '',
-      trail: 'Tech Trails Core Loop',
-      miles: '1.8',
-      reflection: '',
-      mood: 'Calm'
-    });
-  };
-
   return (
     <div className="min-h-screen bg-slate-900 text-slate-100 font-sans selection:bg-amber-400 selection:text-slate-900">
       
@@ -366,7 +289,7 @@ export default function App() {
                 { id: 'walks', label: 'Walks & Trails', icon: Navigation },
                 { id: 'ai-finder', label: 'AI Path Finder', icon: Sparkles, badge: 'Smart' },
                 { id: 'resources', label: 'Resources', icon: Heart },
-                { id: 'log', label: 'Trail Log', icon: Activity }
+                { id: 'log', label: 'Feedback', icon: Activity }
               ].map((item) => {
                 const Icon = item.icon;
                 const isActive = activeTab === item.id;
@@ -414,7 +337,7 @@ export default function App() {
               { id: 'walks', label: 'Walks' },
               { id: 'ai-finder', label: 'AI Finder' },
               { id: 'resources', label: 'Resources' },
-              { id: 'log', label: 'Trail Log' }
+              { id: 'log', label: 'Feedback' }
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -1100,130 +1023,40 @@ export default function App() {
           </div>
         )}
 
-        {/* ================= PAGE 6: TRAIL LOG & REFLECTIONS ================= */}
+        {/* ================= PAGE 6: FEEDBACK ================= */}
         {activeTab === 'log' && (
-          <div className="space-y-10 max-w-4xl mx-auto">
+          <div className="space-y-8 max-w-4xl mx-auto">
             <div>
-              <h1 className="text-3xl font-black text-white">Campus Wellbeing Trail Log</h1>
+              <h1 className="text-3xl font-black text-white">Share Your Walk Feedback</h1>
               <p className="text-slate-400 text-sm mt-1">
-                Completed a walk? Log your miles and share a brief reflection or encouraging note for fellow MTU Huskies!
+                Completed a walk? Tell us how it went! Your feedback helps us improve MTU Wellbeing Walks for fellow Huskies.
               </p>
             </div>
 
-            {/* Log Form */}
-            <div className="bg-slate-800/90 rounded-2xl border border-slate-700 p-6 sm:p-8 space-y-6 shadow-xl">
-              <h2 className="text-lg font-bold text-amber-400 flex items-center gap-2">
-                <Send className="w-5 h-5" /> Log Your Walk
-              </h2>
-
-              {logSubmitted && (
-                <div className="p-4 bg-emerald-950 border border-emerald-500/50 rounded-xl text-emerald-300 text-sm flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5 text-emerald-400" /> Walk logged successfully! Thank you for sharing your reflection.
-                </div>
-              )}
-
-              <form onSubmit={handleLogSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1">Your Name or Alias</label>
-                    <input
-                      type="text"
-                      placeholder="e.g. Alex R."
-                      required
-                      value={logForm.name}
-                      onChange={(e) => setLogForm({ ...logForm, name: e.target.value })}
-                      className="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-sm text-white focus:outline-none focus:border-amber-400"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1">Major or MTU Role</label>
-                    <input
-                      type="text"
-                      placeholder="e.g. Civil Engineering / Senior"
-                      value={logForm.major}
-                      onChange={(e) => setLogForm({ ...logForm, major: e.target.value })}
-                      className="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-sm text-white focus:outline-none focus:border-amber-400"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <div className="sm:col-span-2">
-                    <label className="block text-xs font-bold text-slate-300 mb-1">Trail Walked</label>
-                    <select
-                      value={logForm.trail}
-                      onChange={(e) => setLogForm({ ...logForm, trail: e.target.value })}
-                      className="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-sm text-white focus:outline-none focus:border-amber-400"
-                    >
-                      {TRAILS_DATA.map((t) => (
-                        <option key={t.id} value={t.name}>{t.name}</option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1">Distance (Miles)</label>
-                    <input
-                      type="number"
-                      step="0.1"
-                      value={logForm.miles}
-                      onChange={(e) => setLogForm({ ...logForm, miles: e.target.value })}
-                      className="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-sm text-white focus:outline-none focus:border-amber-400"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-1">Reflection or Note to Huskies</label>
-                  <textarea
-                    rows={3}
-                    placeholder="How did you feel during/after your walk? Any nature highlights?"
-                    required
-                    value={logForm.reflection}
-                    onChange={(e) => setLogForm({ ...logForm, reflection: e.target.value })}
-                    className="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-sm text-white focus:outline-none focus:border-amber-400"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-sm rounded-xl transition"
+            <div className="bg-slate-800/90 rounded-2xl border border-slate-700 p-4 sm:p-6 space-y-4 shadow-xl">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                <h2 className="text-lg font-bold text-amber-400 flex items-center gap-2">
+                  <Send className="w-5 h-5" /> Share Your Feedback
+                </h2>
+                <a
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSfCC7MbuF4aRcASU37Jb_itEfIm0I1XasPWXIdL5TjOarpguA/viewform?usp=header"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs font-semibold text-amber-300 hover:text-amber-200 inline-flex items-center gap-1"
                 >
-                  Post Reflection to Community Log
-                </button>
-              </form>
-            </div>
+                  Open form in a new tab <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              </div>
 
-            {/* Community Log Stream */}
-            <div className="space-y-4">
-              <h2 className="text-xl font-bold text-white flex items-center gap-2">
-                <MessageSquare className="w-5 h-5 text-amber-400" /> Recent Student Logs
-              </h2>
-
-              <div className="space-y-4">
-                {logs.map((log) => (
-                  <div key={log.id} className="bg-slate-800/80 rounded-2xl border border-slate-700/80 p-5 space-y-3">
-                    <div className="flex items-center justify-between border-b border-slate-700/60 pb-2">
-                      <div>
-                        <span className="font-bold text-white text-sm">{log.name}</span>
-                        <span className="text-xs text-slate-400 block">{log.major}</span>
-                      </div>
-                      <span className="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
-                        {log.trail} • {log.miles} mi
-                      </span>
-                    </div>
-
-                    <p className="text-slate-300 text-sm leading-relaxed italic">
-                      "{log.reflection}"
-                    </p>
-
-                    <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1">
-                      <span>{log.date}</span>
-                      <span className="text-amber-300 font-semibold">Mood: {log.mood}</span>
-                    </div>
-                  </div>
-                ))}
+              <div className="rounded-xl overflow-hidden bg-white">
+                <iframe
+                  src="https://docs.google.com/forms/d/e/1FAIpQLSfCC7MbuF4aRcASU37Jb_itEfIm0I1XasPWXIdL5TjOarpguA/viewform?embedded=true"
+                  title="MTU Wellbeing Walks Feedback Form"
+                  className="w-full h-[1200px] border-0"
+                  loading="lazy"
+                >
+                  Loading feedback form…
+                </iframe>
               </div>
             </div>
           </div>
