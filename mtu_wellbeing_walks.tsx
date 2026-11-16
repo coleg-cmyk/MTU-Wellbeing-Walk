@@ -180,7 +180,7 @@ export default function App() {
       Stressed: "We hear you! Houghton's quiet nature paths are proven to lower cortisol. Try a gentle 20-min boardwalk walk at Nara Park.",
       Anxious: "Grounding yourself is key. Try our 5-4-3-2-1 exercise on the Resources page or take a calm stroll along Prince's Point.",
       Tired: "A quick 15-minute trail walk behind the SDC can pump oxygen to your brain and give you natural energy without caffeine crash!",
-      Happy: "Awesome! Share that positive energy by completing a walk and posting an inspiring note on our Trail Log!",
+      Happy: "Awesome! Share that positive energy by completing a walk and sharing how it went on our Feedback page!",
       Overwhelmed: "Take a step back from assignments. Nature doesn't ask anything of you. Head to Tech Trails and just breathe."
     };
     setMoodMessage(messages[mood] || "Taking a short walk is always a great choice for your well-being!");
@@ -289,7 +289,7 @@ export default function App() {
                 { id: 'walks', label: 'Walks & Trails', icon: Navigation },
                 { id: 'ai-finder', label: 'AI Path Finder', icon: Sparkles, badge: 'Smart' },
                 { id: 'resources', label: 'Resources', icon: Heart },
-                { id: 'log', label: 'Trail Log', icon: Activity }
+                { id: 'log', label: 'Feedback', icon: Activity }
               ].map((item) => {
                 const Icon = item.icon;
                 const isActive = activeTab === item.id;
@@ -337,7 +337,7 @@ export default function App() {
               { id: 'walks', label: 'Walks' },
               { id: 'ai-finder', label: 'AI Finder' },
               { id: 'resources', label: 'Resources' },
-              { id: 'log', label: 'Trail Log' }
+              { id: 'log', label: 'Feedback' }
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -1023,11 +1023,11 @@ export default function App() {
           </div>
         )}
 
-        {/* ================= PAGE 6: TRAIL LOG & FEEDBACK ================= */}
+        {/* ================= PAGE 6: FEEDBACK ================= */}
         {activeTab === 'log' && (
           <div className="space-y-8 max-w-4xl mx-auto">
             <div>
-              <h1 className="text-3xl font-black text-white">Campus Wellbeing Trail Log</h1>
+              <h1 className="text-3xl font-black text-white">Share Your Walk Feedback</h1>
               <p className="text-slate-400 text-sm mt-1">
                 Completed a walk? Tell us how it went! Your feedback helps us improve MTU Wellbeing Walks for fellow Huskies.
               </p>
